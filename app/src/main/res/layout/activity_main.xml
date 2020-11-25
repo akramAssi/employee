@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingTop="20dp"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="7dp"
+            android:layout_weight="1"
+            android:background="@drawable/search_text"
+            android:fontFamily="@font/helvetica_oblique"
+            android:gravity="start|center_vertical"
+            android:hint="Enter ID....."
+            android:paddingStart="15dp"
+            android:paddingEnd="32dp"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="-30dp"
+            android:layout_weight=".01"
+            android:background="@drawable/button_search"
+            android:padding="0dp"
+            android:src="@drawable/search" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/showButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight=".01"
+            android:background="@android:color/transparent"
+            android:tint="@color/illuminatingEmerald"
+            app:srcCompat="@drawable/arrow_right" />
+
+        <RadioGroup
+            android:id="@+id/hideSlide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <RadioButton
+                android:id="@+id/idButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:fontFamily="@font/helvetica_oblique"
+                android:gravity="center"
+                android:text="ID"
+                android:textColor="@color/illuminatingEmerald"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/nameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/helvetica_oblique"
+                android:gravity="center"
+                android:text="Name"
+                android:textColor="@color/illuminatingEmerald"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <ImageButton
+            android:id="@+id/insertButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.01"
+            android:background="@android:color/transparent"
+            android:tint="@color/illuminatingEmerald"
+            app:srcCompat="@drawable/add_person" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/displayList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp" />
+
+</LinearLayout>
