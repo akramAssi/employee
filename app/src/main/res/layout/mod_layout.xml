@@ -31,60 +31,81 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/m_salaryEditText"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/edit_text"
-            android:ems="10"
-            android:fontFamily="@font/helvetica_oblique"
-            android:hint="@string/salaryHint"
-            android:inputType="textPersonName"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:textColor="@color/illuminatingEmerald"
-            android:textSize="16sp"
-            android:importantForAutofill="no" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/m_salesEditText"
+            <EditText
+                android:id="@+id/m_salaryEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:fontFamily="@font/helvetica_oblique"
+                android:hint="@string/salaryHint"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/illuminatingEmerald"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/edit_text"
-            android:ems="10"
-            android:fontFamily="@font/helvetica_oblique"
-            android:hint="@string/salesHint"
-            android:inputType="textPersonName"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:textColor="@color/illuminatingEmerald"
-            android:textSize="16sp"
-            android:importantForAutofill="no" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/m_CommissionEditText"
+            <EditText
+                android:id="@+id/m_salesEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:fontFamily="@font/helvetica_oblique"
+                android:hint="@string/salesHint"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/illuminatingEmerald"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text"
-            android:ems="10"
-            android:fontFamily="@font/helvetica_oblique"
-            android:hint="@string/commissionHint"
-            android:inputType="textPersonName"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:textColor="@color/illuminatingEmerald"
-            android:textSize="16sp"
-            android:importantForAutofill="no" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/m_CommissionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:fontFamily="@font/helvetica_oblique"
+                android:hint="@string/commissionHint"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/illuminatingEmerald"
+                android:textSize="16sp" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
