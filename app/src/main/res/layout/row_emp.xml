@@ -110,35 +110,7 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/rate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/reteView"
-                        android:layout_width="33dp"
-                        android:layout_height="24dp"
-                        android:layout_weight="0.005"
-                        android:padding="5dp"
-                        app:srcCompat="@drawable/equal"
-                        android:contentDescription="@string/rate_icon" />
-
-                    <TextView
-                        android:id="@+id/rateText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="13dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/helvetica_oblique"
-                        android:gravity="start|center_vertical"
-                        android:text="@string/rate_demo"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/salary"
@@ -153,8 +125,8 @@
                         android:layout_width="33dp"
                         android:layout_height="24dp"
                         android:layout_weight="0.005"
-                        app:srcCompat="@drawable/salary"
-                        android:contentDescription="@string/salary_icon" />
+                        android:contentDescription="@string/salary_icon"
+                        app:srcCompat="@drawable/salary" />
 
                     <TextView
                         android:id="@+id/salaryText"
@@ -194,6 +166,36 @@
                         android:fontFamily="@font/helvetica_oblique"
                         android:gravity="start|center_vertical"
                         android:text="@string/sales_demo"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/reteView"
+                        android:layout_width="33dp"
+                        android:layout_height="24dp"
+                        android:layout_weight="0.005"
+                        android:padding="5dp"
+                        app:srcCompat="@drawable/equal"
+                        android:contentDescription="@string/rate_icon" />
+
+                    <TextView
+                        android:id="@+id/rateText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="13dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/helvetica_oblique"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/rate_demo"
                         android:textColor="@android:color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
