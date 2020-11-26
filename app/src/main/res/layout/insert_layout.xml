@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:id="@+id/insertView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,8 +26,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:gravity="center_vertical|end"
-                android:paddingEnd="10dp"
-                android:text="save"
+                android:layout_marginEnd="10dp"
+                android:text="@string/save"
                 android:textColor="@color/illuminatingEmerald"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -43,12 +42,13 @@
             android:background="@drawable/edit_text"
             android:ems="10"
             android:fontFamily="@font/helvetica_oblique"
-            android:hint="Name ..."
+            android:hint="@string/nameHint"
             android:inputType="textPersonName"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textColor="@color/illuminatingEmerald"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/idEditText"
@@ -60,12 +60,13 @@
             android:background="@drawable/edit_text"
             android:ems="10"
             android:fontFamily="@font/helvetica_oblique"
-            android:hint="ID ..."
+            android:hint="@string/idHint"
             android:inputType="textPersonName"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textColor="@color/illuminatingEmerald"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/genderEditText"
@@ -77,12 +78,13 @@
             android:background="@drawable/edit_text"
             android:ems="10"
             android:fontFamily="@font/helvetica_oblique"
-            android:hint="Gender ..."
+            android:hint="@string/genderHint"
             android:inputType="textPersonName"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textColor="@color/illuminatingEmerald"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/salaryEditText"
@@ -94,12 +96,13 @@
             android:background="@drawable/edit_text"
             android:ems="10"
             android:fontFamily="@font/helvetica_oblique"
-            android:hint="salary ..."
+            android:hint="@string/salaryHint"
             android:inputType="textPersonName"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textColor="@color/illuminatingEmerald"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/salesEditText"
@@ -111,12 +114,13 @@
             android:background="@drawable/edit_text"
             android:ems="10"
             android:fontFamily="@font/helvetica_oblique"
-            android:hint="Sales ..."
+            android:hint="@string/salesHint"
             android:inputType="textPersonName"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textColor="@color/illuminatingEmerald"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/CommissionEditText"
@@ -125,15 +129,17 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/edit_text"
             android:ems="10"
             android:fontFamily="@font/helvetica_oblique"
-            android:hint="Commission...."
+            android:hint="@string/commissionHint"
             android:inputType="textPersonName"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textColor="@color/illuminatingEmerald"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:importantForAutofill="no" />
 
     </LinearLayout>
 </ScrollView>
