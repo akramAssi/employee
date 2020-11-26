@@ -1,8 +1,11 @@
 package com.example.employee;
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -28,7 +31,7 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         holder.name.setText("Rakan Assi");
         holder.idText.setText("231231244");
         holder.genderText.setText("male");
@@ -41,7 +44,7 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
             public void onClick(View view) {
 
                 final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(cox, R.style.bottomSheatTheme);
-                View bottomSheetView = LayoutInflater.from(cox).inflate(R.layout.mod_layout, null);
+                @SuppressLint("InflateParams") View bottomSheetView = LayoutInflater.from(cox).inflate(R.layout.mod_layout, null);
 
                 bottomSheetView.findViewById(R.id.modifySaveButton).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -52,6 +55,33 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
 
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
+            }
+        });
+
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialogBox =new Dialog(cox,R.style.bottomSheatTheme);
+                dialogBox.setContentView(R.layout.delete_layout);
+                TextView name = dialogBox.findViewById(R.id.nameEmployee);
+                Button okButton =dialogBox.findViewById(R.id.okButton);
+                Button cancelButton = dialogBox.findViewById(R.id.cancelButton);
+
+                name.setText("ok + " + position);
+                okButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogBox.dismiss();
+                    }
+                });
+
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogBox.dismiss();
+                    }
+                });
+                dialogBox.show();
             }
         });
 
