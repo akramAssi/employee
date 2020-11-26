@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Employee</string>
+    <string name="save">save</string>
+    <string name="nameHint">Name …</string>
+    <string name="idHint">ID …</string>
+    <string name="genderHint">Gender …</string>
+    <string name="salaryHint">Salary …</string>
+    <string name="salesHint">Sales …</string>
+    <string name="commissionHint">Commission …</string>
+    <string name="icon_warning">icon warning</string>
+    <string name="message_delete_dialog">are you sure to remove</string>
 </resources>
