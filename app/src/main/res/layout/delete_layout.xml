@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/delete_border_dialog"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="35dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/warning"
+                android:contentDescription="@string/icon_warning" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/helvetica_oblique"
+                android:gravity="center"
+                android:text="@string/message_delete_dialog"
+                android:textColor="@color/delete"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/nameEmployee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/helvetica_oblique"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/delete"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingStart="15dp"
+                android:paddingTop="25dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="25dp"
+                style="?android:attr/buttonBarButtonStyle">
+
+                <Button
+                    android:id="@+id/cancelButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="25dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ok_button"
+                    android:text="@android:string/cancel"
+                    android:textColor="@android:color/white"
+                    style="?android:attr/buttonBarButtonStyle"
+                    />
+
+                <Button
+                    android:id="@+id/okButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/cancel_button"
+                    android:text="@android:string/ok"
+                    android:textColor="@android:color/white"
+                    style="?android:attr/buttonBarButtonStyle"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
