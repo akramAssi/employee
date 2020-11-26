@@ -9,4 +9,18 @@
     <string name="commissionHint">Commission …</string>
     <string name="icon_warning">icon warning</string>
     <string name="message_delete_dialog">are you sure to remove</string>
+    <string name="description_icon_person">image for person (male of female)</string>
+    <string name="name_demo">Akram assi</string>
+    <string name="id_icon">id_icon</string>
+    <string name="id_demo">12555943</string>
+    <string name="icon_gender">iconGender</string>
+    <string name="gender_demo">mele</string>
+    <string name="rate_demo">0.123</string>
+    <string name="salary_demo">3440</string>
+    <string name="salary_icon">salary_icon</string>
+    <string name="delete_icon">delete_icon</string>
+    <string name="sales_icon">sales_icon</string>
+    <string name="sales_demo">102344</string>
+    <string name="rate_icon">rate_icon</string>
+    <string name="edit_icon">edit icon</string>
 </resources>
