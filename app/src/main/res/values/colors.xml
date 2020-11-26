@@ -8,5 +8,6 @@
     /// color schema
 
     <color name="illuminatingEmerald">#299FE4</color>
-    <color name="delete">#E83F6F</color>
+    <color name="delete">#E74C3C</color>
+    <color name="ok_button">#32936F</color>
 </resources>
