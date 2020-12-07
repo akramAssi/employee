@@ -39,4 +39,9 @@
     <string name="hello_world">Hello Square World!</string>
     <string name="home">Home</string>
     <string name="no_data">No Data</string>
+    <string name="descrip_showButton">icon for show search choice</string>
+    <string name="descrip_search_button">icon for search Button</string>
+    <string name="id">ID</string>
+    <string name="name">Name</string>
+    <string name="descrip_insertbutton">icon for insertButton</string>
 </resources>
