@@ -24,10 +24,12 @@
             android:background="@drawable/search_text"
             android:fontFamily="@font/helvetica_oblique"
             android:gravity="start|center_vertical"
-            android:hint="Enter ID....."
+            android:hint="@string/id_search"
+            android:inputType="number"
             android:paddingStart="15dp"
             android:paddingEnd="32dp"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:importantForAutofill="no" />
 
         <ImageButton
             android:id="@+id/searchButton"
@@ -37,13 +39,17 @@
             android:layout_weight=".01"
             android:background="@drawable/button_search"
             android:padding="0dp"
-            android:src="@drawable/search" />
+            android:src="@drawable/search"
+            android:contentDescription="@string/descrip_search_button" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <ImageButton
@@ -53,7 +59,8 @@
             android:layout_weight=".01"
             android:background="@android:color/transparent"
             android:tint="@color/illuminatingEmerald"
-            app:srcCompat="@drawable/arrow_right" />
+            app:srcCompat="@drawable/arrow_right"
+            android:contentDescription="@string/descrip_showButton" />
 
         <RadioGroup
             android:id="@+id/hideSlide"
@@ -63,7 +70,7 @@
             android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="invisible">
 
             <RadioButton
                 android:id="@+id/idButton"
@@ -73,7 +80,7 @@
                 android:checked="true"
                 android:fontFamily="@font/helvetica_oblique"
                 android:gravity="center"
-                android:text="ID"
+                android:text="@string/id"
                 android:textColor="@color/illuminatingEmerald"
                 android:textSize="16sp" />
 
@@ -84,7 +91,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/helvetica_oblique"
                 android:gravity="center"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="@color/illuminatingEmerald"
                 android:textSize="16sp" />
         </RadioGroup>
@@ -96,7 +103,8 @@
             android:layout_weight="0.01"
             android:background="@android:color/transparent"
             android:tint="@color/illuminatingEmerald"
-            app:srcCompat="@drawable/add_person" />
+            app:srcCompat="@drawable/add_person"
+            android:contentDescription="@string/descrip_insertbutton" />
 
     </LinearLayout>
 
@@ -104,6 +112,18 @@
         android:id="@+id/displayList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp" />
+        android:padding="20dp" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/dataMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/no_data"
+        tools:visibility="gone"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimary"/>
 
 </LinearLayout>
