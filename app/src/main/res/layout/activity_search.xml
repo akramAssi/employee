@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/box_inset_layout_padding"
+    tools:context=".searchActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_baseline_arrow_back_24"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/helvetica_oblique"
+            android:includeFontPadding="true"
+            android:text="@string/home"
+            android:textColor="@color/illuminatingEmerald"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/displaySearchList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/dataSh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/no_data"
+        tools:visibility="gone"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimary"/>
+</LinearLayout>
