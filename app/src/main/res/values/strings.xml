@@ -23,4 +23,20 @@
     <string name="sales_demo">102344</string>
     <string name="rate_icon">rate_icon</string>
     <string name="edit_icon">edit icon</string>
+    <string name="title_activity_search">searchActivity</string>
+    <string name="id_search">Enter ID …</string>
+    <string name="name_search">Enter Name …</string>
+
+    <string-array name="numbers">
+        <item>Male</item>
+        <item>Female</item>
+
+    </string-array>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="home">Home</string>
+    <string name="no_data">No Data</string>
 </resources>
