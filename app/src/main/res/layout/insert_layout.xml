@@ -75,7 +75,7 @@
                 android:fontFamily="@font/helvetica_oblique"
                 android:hint="@string/idHint"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:textColor="@color/illuminatingEmerald"
@@ -91,20 +91,12 @@
             android:layout_marginEnd="10dp"
             android:orientation="horizontal">
 
-            <EditText
+            <Spinner
                 android:id="@+id/genderEditText"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@android:color/transparent"
-                android:ems="10"
-                android:fontFamily="@font/helvetica_oblique"
-                android:hint="@string/genderHint"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:textColor="@color/illuminatingEmerald"
-                android:textSize="16sp" />
+                android:importantForAutofill="no" />
         </LinearLayout>
 
         <LinearLayout
@@ -125,7 +117,7 @@
                 android:fontFamily="@font/helvetica_oblique"
                 android:hint="@string/salaryHint"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName"
+                android:inputType="numberDecimal"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:textColor="@color/illuminatingEmerald"
@@ -150,7 +142,7 @@
                 android:fontFamily="@font/helvetica_oblique"
                 android:hint="@string/salesHint"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName"
+                android:inputType="numberDecimal"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:textColor="@color/illuminatingEmerald"
@@ -170,16 +162,16 @@
                 android:id="@+id/CommissionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:background="@android:color/transparent"
                 android:ems="10"
                 android:fontFamily="@font/helvetica_oblique"
                 android:hint="@string/commissionHint"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName"
+                android:inputType="numberDecimal"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:textColor="@color/illuminatingEmerald"
-                android:textSize="16sp"
-                android:background="@android:color/transparent" />
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>
