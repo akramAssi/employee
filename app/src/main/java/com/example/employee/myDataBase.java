@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class myDataBase {
@@ -55,17 +54,17 @@ public class myDataBase {
         return getData(rs);
     }
 
-    public boolean delete(int id)
+    public void delete(int id)
     {
-        return db.delete("emp","id = ?",new String[]{""+id}) > 0;
+        db.delete("emp", "id = ?", new String[]{"" + id});
     }
-    public boolean update(int id,float salary,float sales,float rate)
+    public void update(int id, float salary, float sales, float rate)
     {
         ContentValues vs=new ContentValues();
         vs.put("BaseSalary",salary);
         vs.put("TotalSalary",sales);
         vs.put("CommissionRate",rate);
-        return db.update("emp",vs,"id = "+id,null)>0;
+        db.update("emp", vs, "id = " + id, null);
     }
     private ArrayList<emp> getData(Cursor rs)
     {
