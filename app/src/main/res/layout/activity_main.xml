@@ -25,11 +25,12 @@
             android:fontFamily="@font/helvetica_oblique"
             android:gravity="start|center_vertical"
             android:hint="@string/id_search"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:paddingStart="15dp"
             android:paddingEnd="32dp"
-            android:textSize="18sp"
-            android:importantForAutofill="no" />
+            android:textColor="@color/illuminatingEmerald"
+            android:textSize="18sp" />
 
         <ImageButton
             android:id="@+id/searchButton"
