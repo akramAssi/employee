@@ -218,12 +218,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Float.parseFloat(sales.getText().toString()),
                             Float.parseFloat(rate.getText().toString())
                     };
-//                    try {
-//                        db.execSQL("insert into emp values(?,?,?,?,?,?);", info);
-//                    } catch (Exception ex) {
-//                        Log.e("error_sql", Objects.requireNonNull(ex.getMessage()));
-//                    }
-//                    update();
+
 
                     Intent i = new Intent(getApplicationContext(), storeService.class);
                     i.setAction(storeService.ACTION_INSERT_EMPLOYEE);
@@ -254,27 +249,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             searchText.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
         }
         if (view == searchButton) {
-            Intent search = new Intent(this, searchActivity.class);
-            System.out.println(searchText.getText().toString());
-
 
             if (searchText.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Enter value ", Toast.LENGTH_LONG).show();
                 return;
             }
-            if (hideSlide.getCheckedRadioButtonId() == R.id.idButton) {
-                int id = Integer.parseInt(searchText.getText().toString());
-                search.putExtra("cox", DB.search(id));
-            } else {
-                String name = searchText.getText().toString();
-                search.putExtra("cox", DB.search(name));
-            }
 
-
-//            search.putExtra("id",id);
-
-
-            startActivity(search);
+            Intent i = new Intent(getApplicationContext(), storeService.class);
+            i.setAction(storeService.ACTION_SEARCH);
+            int CheckedRadioButtonId = hideSlide.getCheckedRadioButtonId();
+            i.putExtra(storeService.Checked_Radio_ButtonId, CheckedRadioButtonId);
+            i.putExtra(storeService.Search_content, searchText.getText().toString());
+            startService(i);
 
         }
     }
