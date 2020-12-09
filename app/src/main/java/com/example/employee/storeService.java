@@ -103,7 +103,7 @@ public class storeService extends IntentService {
                         String name = searchContent;
                         search.putExtra("cox", MainActivity.DB.search(name));
                     }
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    search.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(search);
                 }
             }
