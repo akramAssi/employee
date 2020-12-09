@@ -10,10 +10,11 @@ import java.util.Objects;
 public class storeService extends IntentService {
 
     //  action names
+    public static final String ACTION_SHOW_ALL_EMPLOYEE = "displayRow";
     public static final String ACTION_DELETE_EMPLOYEE = "deleteRow";
     public static final String ACTION_INSERT_EMPLOYEE = "insertRow";
-    public static final String ACTION_SHOW_ALL_EMPLOYEE = "displayRow";
     public static final String ACTION_MODIFY_EMPLOYEE = "modifyRow";
+    public static final String ACTION_SEARCH = "searchRow";
 
     //  parameters
 
@@ -23,6 +24,9 @@ public class storeService extends IntentService {
     public static final String salary = "salary";
     public static final String sale = "sale";
     public static final String rate = "rate";
+    public static final String Search_content = "searchContent";
+    public static final String Search_name = "searchName";
+    public static final String Checked_Radio_ButtonId = "CheckedRadioButtonId";
 
 
     public storeService() {
@@ -63,25 +67,45 @@ public class storeService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            if (ACTION_DELETE_EMPLOYEE.equals(action)) {
-                emp param_person = (emp) intent.getSerializableExtra(person);
-                int safePosition = intent.getIntExtra(Position, 0);
-                if (param_person != null) {
-                    deleteAction(param_person, safePosition);
+            switch (action) {
+                case ACTION_DELETE_EMPLOYEE: {
+                    emp param_person = (emp) intent.getSerializableExtra(person);
+                    int safePosition = intent.getIntExtra(Position, 0);
+                    if (param_person != null) {
+                        deleteAction(param_person, safePosition);
+                        break;
+                    }
                 }
+                case ACTION_MODIFY_EMPLOYEE: {
+                    emp param_person = (emp) intent.getSerializableExtra(person);
+                    float param_salary = intent.getFloatExtra(salary, 0);
+                    float param_sale = intent.getFloatExtra(sale, 0);
+                    float param_rate = intent.getFloatExtra(rate, 0);
+                    int safePosition = intent.getIntExtra(Position, 0);
+                    modifyAction(Objects.requireNonNull(param_person), param_salary, param_sale, param_rate, safePosition);
+                    break;
+                }
+                case ACTION_INSERT_EMPLOYEE: {
+                    Object[] param_info = (Object[]) intent.getSerializableExtra(info);
+                    insertAction(param_info);
+                    break;
+                }
+                case ACTION_SEARCH: {
+                    int CheckedRadioButtonId = intent.getIntExtra(Checked_Radio_ButtonId, -11);
+                    String searchContent = intent.getStringExtra(Search_content);
 
-            } else if (ACTION_MODIFY_EMPLOYEE.equals(action)) {
-                emp param_person = (emp) intent.getSerializableExtra(person);
-                float param_salary = intent.getFloatExtra(salary, 0);
-                float param_sale = intent.getFloatExtra(sale, 0);
-                float param_rate = intent.getFloatExtra(rate, 0);
-                int safePosition = intent.getIntExtra(Position, 0);
-                modifyAction(Objects.requireNonNull(param_person), param_salary, param_sale, param_rate, safePosition);
+                    Intent search = new Intent(this, searchActivity.class);
 
-            } else if (ACTION_INSERT_EMPLOYEE.equals(action)) {
-                Object[] param_info = (Object[]) intent.getSerializableExtra(info);
-                System.out.println("in handel service");
-                insertAction(param_info);
+                    if (CheckedRadioButtonId == R.id.idButton) {
+                        int id = Integer.parseInt(searchContent != null ? searchContent : "0");
+                        search.putExtra("cox", MainActivity.DB.search(id));
+                    } else {
+                        String name = searchContent;
+                        search.putExtra("cox", MainActivity.DB.search(name));
+                    }
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(search);
+                }
             }
         }
     }
