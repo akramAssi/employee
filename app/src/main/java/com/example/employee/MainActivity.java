@@ -5,12 +5,14 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -32,7 +34,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView searchText;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean ifOpen = false;
     private int shortAnimationDuration;
     private TextView dataMain;
+    private BroadcastReceiver act;
 
 
     @Override
@@ -103,6 +105,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         idButton.setOnClickListener(this);
         nameButton.setOnClickListener(this);
 
+        act = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                String action = intent.getAction();
+                if (action != null) {
+                    switch (action) {
+                        case storeService.ACTION_DELETE_EMPLOYEE: {
+                            int position = intent.getIntExtra(storeService.Position, 0);
+                            ad.Remove(position);
+                            break;
+                        }
+                        case storeService.ACTION_MODIFY_EMPLOYEE: {
+                            int position = intent.getIntExtra(storeService.Position, 0);
+                            float salary = intent.getFloatExtra(storeService.salary, 0);
+                            float sale = intent.getFloatExtra(storeService.sale, 0);
+                            float rate = intent.getFloatExtra(storeService.rate, 0);
+                            ad.modify(position, sale, rate, salary);
+                            break;
+                        }
+                        case storeService.ACTION_INSERT_EMPLOYEE: {
+                            update();
+                            break;
+                        }
+                    }
+
+
+                }
+            }
+        };
+
+        IntentFilter y = new IntentFilter();
+
+        y.addAction(storeService.ACTION_DELETE_EMPLOYEE);
+        y.addAction(storeService.ACTION_MODIFY_EMPLOYEE);
+        y.addAction(storeService.ACTION_INSERT_EMPLOYEE);
+
+        registerReceiver(act, y);
+
 
     }
 
@@ -121,8 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             spinner = bottomSheetView.findViewById(R.id.genderEditText);
             final String[] gen = new String[1];
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                    R.array.numbers, R.layout.colorss);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.numbers, R.layout.colorss);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
 
@@ -131,7 +171,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     String text = adapterView.getItemAtPosition(i).toString();
                     gen[0] = text;
-                    Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -144,10 +183,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void onClick(View view) {
                     TextView name = bottomSheetView.findViewById(R.id.nameEditText);
                     TextView id = bottomSheetView.findViewById(R.id.idEditText);
-
                     TextView salary = bottomSheetView.findViewById(R.id.salaryEditText);
                     TextView sales = bottomSheetView.findViewById(R.id.salesEditText);
                     TextView rate = bottomSheetView.findViewById(R.id.CommissionEditText);
+
                     boolean isempty = false;
                     if (name.getText().toString().isEmpty()) {
                         anim(name);
@@ -171,17 +210,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         isempty = true;
                     }
                     if (isempty) return;
-                    System.out.println(gen[0]);
-                    Object[] info = {Integer.parseInt(id.getText().toString()), name.getText().toString(), gen[0].equals("Male") ? 'm' : 'f',
-                            Float.parseFloat(salary.getText().toString()), Float.parseFloat(sales.getText().toString()),
-                            Float.parseFloat(rate.getText().toString())};
-                    try {
-                        db.execSQL("insert into emp values(?,?,?,?,?,?);", info);
-                    } catch (Exception ex) {
-                        Log.e("error_sql", Objects.requireNonNull(ex.getMessage()));
-                    }
 
-                    update();
+                    Object[] info = {Integer.parseInt(id.getText().toString()),
+                            name.getText().toString(),
+                            gen[0].equals("Male") ? 'm' : 'f',
+                            Float.parseFloat(salary.getText().toString()),
+                            Float.parseFloat(sales.getText().toString()),
+                            Float.parseFloat(rate.getText().toString())
+                    };
+//                    try {
+//                        db.execSQL("insert into emp values(?,?,?,?,?,?);", info);
+//                    } catch (Exception ex) {
+//                        Log.e("error_sql", Objects.requireNonNull(ex.getMessage()));
+//                    }
+//                    update();
+
+                    Intent i = new Intent(getApplicationContext(), storeService.class);
+                    i.setAction(storeService.ACTION_INSERT_EMPLOYEE);
+                    i.putExtra(storeService.info, info);
+                    startService(i);
+
                     bottomSheetDialog.dismiss();
                 }
             });
