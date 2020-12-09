@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -60,16 +60,24 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
         diffResult.dispatchUpdatesTo(this);
     }
 
+    public void Remove(int safePosition) {
+        if (safePosition != RecyclerView.NO_POSITION) {
+            person.remove(safePosition);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void modify(int safePosition, float sales, float rate, float salary) {
+        person.get(safePosition).setSales(sales);
+        person.get(safePosition).setSalary(salary);
+        person.get(safePosition).setRate(rate);
+        notifyDataSetChanged();
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-//        cs.moveToNext();
-//        int x_id =cs.getInt(0);
-//        String x_name =cs.getString(1);
-//        String x_gernder=cs.getString(2).equals("m") ? "mele" : "female";
-//        float x_salaray=cs.getFloat(3);
-//        float x_sales=cs.getFloat(4);
-//        float x_rate=cs.getFloat(5);
+
 
         holder.idText.setText("" + person.get(position).getId());
 
@@ -115,12 +123,16 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
                         float salary = Float.parseFloat(x.getText().toString());
                         float sales = Float.parseFloat(x2.getText().toString());
                         float rate = Float.parseFloat(x3.getText().toString());
-                        MainActivity.DB.update(person.get(safePosition).getId(), salary, sales, rate);
-                        Toast.makeText(cox, "update successfully", Toast.LENGTH_LONG).show();
-                        person.get(position).setSales(sales);
-                        person.get(position).setSalary(salary);
-                        person.get(position).setRate(rate);
-                        notifyDataSetChanged();
+
+
+                        Intent i = new Intent(cox, storeService.class);
+                        i.setAction(storeService.ACTION_MODIFY_EMPLOYEE);
+                        i.putExtra(storeService.person, person.get(safePosition));
+                        i.putExtra(storeService.Position, safePosition);
+                        i.putExtra(storeService.salary, salary);
+                        i.putExtra(storeService.sale, sales);
+                        i.putExtra(storeService.rate, rate);
+                        cox.startService(i);
                         bottomSheetDialog.dismiss();
                     }
                 });
@@ -143,14 +155,13 @@ public class adapter extends RecyclerView.Adapter<adapter.MyViewHolder> {
                 okButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        MainActivity.DB.delete(person.get(safePosition).getId());
-                        Toast.makeText(cox, "delete successfully", Toast.LENGTH_LONG).show();
-//                        update.callOnClick();
-                        if (safePosition != RecyclerView.NO_POSITION) {
-                            person.remove(position);
 
-                            notifyDataSetChanged();
-                        }
+                        Intent i = new Intent(cox, storeService.class);
+                        i.setAction(storeService.ACTION_DELETE_EMPLOYEE);
+                        i.putExtra(storeService.person, person.get(safePosition));
+                        i.putExtra(storeService.Position, safePosition);
+                        cox.startService(i);
+
                         dialogBox.dismiss();
                     }
                 });
