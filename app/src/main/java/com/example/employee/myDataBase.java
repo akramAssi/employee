@@ -34,7 +34,7 @@ public class myDataBase {
     public ArrayList<emp> search(int id)
     {
         try {
-            rs = db.rawQuery("select * from emp where id = ? ", new String[]{"" + id});
+            rs = db.rawQuery("select * from emp where id LIKE '%" + id + "%' ", null);
         }
         catch (Exception ex)
         {
