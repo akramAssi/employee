@@ -44,4 +44,8 @@
     <string name="id">ID</string>
     <string name="name">Name</string>
     <string name="descrip_insertbutton">icon for insertButton</string>
+    <string name="icon_employee_left">icon employee left</string>
+    <string name="icon_employee_right">icon employee right</string>
+    <string name="icon_employee_top">icon employee top</string>
+    <string name="design">Design by akram</string>
 </resources>
