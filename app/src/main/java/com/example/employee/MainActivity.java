@@ -9,7 +9,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
@@ -44,10 +43,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RadioButton idButton;
     private RadioButton nameButton;
     private RecyclerView displayList;
-    public static myDataBase DB;
     private Spinner spinner;
     /// dataBase
-    private SQLiteDatabase db = null;
+//    public static myDataBase DB;
+//    private SQLiteDatabase db = null;
     private adapter ad;
     /// animation
     private Animation open;
@@ -58,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int shortAnimationDuration;
     private TextView dataMain;
     private BroadcastReceiver act;
+    private Context context;
 
 
     @Override
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dataMain = findViewById(R.id.dataMain);
 
 
+        context = this;
 //// animation
         displayList = findViewById(R.id.displayList);
         open = AnimationUtils.loadAnimation(this, R.anim.open);
@@ -84,21 +85,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 android.R.integer.config_shortAnimTime);
 
 
-        db = openOrCreateDatabase("employee", MODE_PRIVATE, null);
+        Intent i = new Intent(getApplicationContext(), storeService.class);
+        i.setAction(storeService.ACTION_SHOW_ALL_EMPLOYEE);
+        i.putExtra("update", "no");
+        startService(i);
 
-        DB = new myDataBase(db);
-        ArrayList<emp> fg = DB.getAllData();
-
-        if (fg.isEmpty()) {
-            displayList.setVisibility(View.GONE);
-            dataMain.setVisibility(View.VISIBLE);
-        } else {
-            displayList.setVisibility(View.VISIBLE);
-            dataMain.setVisibility(View.GONE);
-        }
-        ad = new adapter(this, fg);
-        displayList.setAdapter(ad);
-        displayList.setLayoutManager(new LinearLayoutManager(this));
         insertButton.setOnClickListener(this);
         showButton.setOnClickListener(this);
         searchButton.setOnClickListener(this);
@@ -129,6 +120,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             update();
                             break;
                         }
+                        case storeService.ACTION_SHOW_ALL_EMPLOYEE: {
+                            ArrayList<emp> fg = (ArrayList<emp>) intent.getSerializableExtra(storeService.data);
+
+
+                            if (fg.isEmpty()) {
+                                displayList.setVisibility(View.GONE);
+                                dataMain.setVisibility(View.VISIBLE);
+                            } else {
+                                displayList.setVisibility(View.VISIBLE);
+                                dataMain.setVisibility(View.GONE);
+                            }
+                            if (intent.getStringExtra("update").equals("no")) {
+                                ad = new adapter(context, fg);
+                                displayList.setAdapter(ad);
+                                displayList.setLayoutManager(new LinearLayoutManager(context));
+                                break;
+                            } else {
+                                ad.updateData(fg);
+                            }
+
+                        }
                     }
 
 
@@ -141,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         y.addAction(storeService.ACTION_DELETE_EMPLOYEE);
         y.addAction(storeService.ACTION_MODIFY_EMPLOYEE);
         y.addAction(storeService.ACTION_INSERT_EMPLOYEE);
+        y.addAction(storeService.ACTION_SHOW_ALL_EMPLOYEE);
 
         registerReceiver(act, y);
 
@@ -267,16 +280,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void update() {
 
-        ArrayList<emp> fg = DB.getAllData();
+//        ArrayList<emp> fg = DB.getAllData();
 
-        if (fg.isEmpty()) {
-            displayList.setVisibility(View.GONE);
-            dataMain.setVisibility(View.VISIBLE);
-        } else {
-            displayList.setVisibility(View.VISIBLE);
-            dataMain.setVisibility(View.GONE);
-        }
-        ad.updateData(fg);
+//        if (fg.isEmpty()) {
+//            displayList.setVisibility(View.GONE);
+//            dataMain.setVisibility(View.VISIBLE);
+//        } else {
+//            displayList.setVisibility(View.VISIBLE);
+//            dataMain.setVisibility(View.GONE);
+//        }
+//        ad.updateData(fg);
+
+        Intent i = new Intent(getApplicationContext(), storeService.class);
+        i.setAction(storeService.ACTION_SHOW_ALL_EMPLOYEE);
+        i.putExtra("update", "yes");
+        startService(i);
+
     }
 
     @SuppressLint("WrongConstant")
