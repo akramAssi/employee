@@ -1,10 +1,13 @@
 package com.example.employee;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.Objects;
+
+
 
 
 public class storeService extends IntentService {
@@ -28,41 +31,23 @@ public class storeService extends IntentService {
     public static final String Search_name = "searchName";
     public static final String Search_gender = "searchGender";
     public static final String Checked_Radio_ButtonId = "CheckedRadioButtonId";
+    public static final String data = "data";
 
 
+    public static myDataBase DB;
+    private SQLiteDatabase db = null;
 
     public storeService() {
         super("storeService");
     }
 
-    /**
-     * Starts this service to perform action Foo with the given parameters. If
-     * the service is already performing a task this action will be queued.
-     *
-     * @see IntentService
-     */
-    // TODO: Customize helper method
-    public static void startActionFoo(Context context, String param1, String param2) {
-//        Intent intent = new Intent(context, storeService.class);
-//        intent.setAction(ACTION_FOO);
-//        intent.putExtra(EXTRA_PARAM1, param1);
-//        intent.putExtra(EXTRA_PARAM2, param2);
-//        context.startService(intent);
-    }
 
-    /**
-     * Starts this service to perform action Baz with the given parameters. If
-     * the service is already performing a task this action will be queued.
-     *
-     * @see IntentService
-     */
-    // TODO: Customize helper method
-    public static void startActionBaz(Context context, String param1, String param2) {
-//        Intent intent = new Intent(context, storeService.class);
-//        intent.setAction(ACTION_BAZ);
-//        intent.putExtra(EXTRA_PARAM1, param1);
-//        intent.putExtra(EXTRA_PARAM2, param2);
-//        context.startService(intent);
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        db = openOrCreateDatabase("employee", MODE_PRIVATE, null);
+
+        DB = new myDataBase(db);
     }
 
     @Override
@@ -115,20 +100,34 @@ public class storeService extends IntentService {
 
                     if (CheckedRadioButtonId == R.id.idButton) {
                         int id = Integer.parseInt(searchContent != null ? searchContent : "0");
-                        search.putExtra("cox", MainActivity.DB.search(id));
+                        search.putExtra("cox", DB.search(id));
                     } else {
-                        String name = searchContent;
-                        search.putExtra("cox", MainActivity.DB.search(name));
+                        search.putExtra("cox", DB.search(searchContent));
                     }
                     search.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(search);
+                    break;
+                }
+                case ACTION_SHOW_ALL_EMPLOYEE: {
+                    String sd = intent.getStringExtra("update");
+                    showAction(sd);
+                    break;
                 }
             }
         }
     }
 
+    private void showAction(String sd) {
+        ArrayList<emp> fg = DB.getAllData();
+        Intent intent = new Intent();
+        intent.setAction(ACTION_SHOW_ALL_EMPLOYEE);
+        intent.putExtra("update", sd);
+        intent.putExtra(data, fg);
+        sendBroadcast(intent);
+    }
+
     private String modifyAction(emp param_person, float param_salary, float param_sale, float param_rate, int safePosition) {
-        MainActivity.DB.update(param_person.getId(), param_salary, param_sale, param_rate);
+        DB.update(param_person.getId(), param_salary, param_sale, param_rate);
 
         Intent intent = new Intent();
         intent.setAction(ACTION_MODIFY_EMPLOYEE);
@@ -153,7 +152,7 @@ public class storeService extends IntentService {
 
     private void deleteAction(emp param_person, int safePosition) {
 
-        MainActivity.DB.delete(param_person.getId());
+        DB.delete(param_person.getId());
 
         Intent intent = new Intent();
         intent.setAction(ACTION_DELETE_EMPLOYEE);
@@ -164,7 +163,7 @@ public class storeService extends IntentService {
     }
 
     private void insertAction(Object[] info) {
-        MainActivity.DB.insert(info);
+        DB.insert(info);
 
         Intent intent = new Intent();
         intent.setAction(ACTION_INSERT_EMPLOYEE);
