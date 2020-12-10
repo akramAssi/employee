@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".splashScreen">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="113dp">
+
+        <ImageView
+            android:id="@+id/employee_top"
+            android:layout_width="337dp"
+            android:layout_height="285dp"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/icon_employee_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.326"
+            app:srcCompat="@drawable/employee_head" />
+
+        <ImageView
+            android:id="@+id/employee_left"
+            android:layout_width="337dp"
+            android:layout_height="285dp"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/icon_employee_left"
+            app:srcCompat="@drawable/employee_left" />
+
+        <ImageView
+            android:id="@+id/employee_right"
+            android:layout_width="337dp"
+            android:layout_height="285dp"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/icon_employee_top"
+            app:srcCompat="@drawable/employee_right" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/programeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="72dp"
+        android:fontFamily="@font/helvetica_oblique"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/helvetica_oblique"
+        android:text="@string/design"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+</RelativeLayout>
