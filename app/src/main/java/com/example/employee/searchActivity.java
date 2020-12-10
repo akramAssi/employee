@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import static com.example.employee.MainActivity.DB;
 
 public class searchActivity extends AppCompatActivity {
 
@@ -88,11 +87,6 @@ public class searchActivity extends AppCompatActivity {
         registerReceiver(act, yx);
 
 
-    }
-
-    private void update()
-    {
-        ad.updateData(DB.getAllData());
     }
 
 
