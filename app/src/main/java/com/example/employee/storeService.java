@@ -26,7 +26,9 @@ public class storeService extends IntentService {
     public static final String rate = "rate";
     public static final String Search_content = "searchContent";
     public static final String Search_name = "searchName";
+    public static final String Search_gender = "searchGender";
     public static final String Checked_Radio_ButtonId = "CheckedRadioButtonId";
+
 
 
     public storeService() {
@@ -73,6 +75,10 @@ public class storeService extends IntentService {
                     int safePosition = intent.getIntExtra(Position, 0);
                     if (param_person != null) {
                         deleteAction(param_person, safePosition);
+                        Intent i = new Intent(getApplicationContext(), myNotification.class);
+                        i.setAction(ACTION_DELETE_EMPLOYEE);
+                        i.putExtra(Search_name, param_person.getName());
+                        startForegroundService(i);
                         break;
                     }
                 }
@@ -82,12 +88,23 @@ public class storeService extends IntentService {
                     float param_sale = intent.getFloatExtra(sale, 0);
                     float param_rate = intent.getFloatExtra(rate, 0);
                     int safePosition = intent.getIntExtra(Position, 0);
-                    modifyAction(Objects.requireNonNull(param_person), param_salary, param_sale, param_rate, safePosition);
+                    String message = modifyAction(Objects.requireNonNull(param_person), param_salary, param_sale, param_rate, safePosition);
+
+                    Intent i = new Intent(getApplicationContext(), myNotification.class);
+                    i.setAction(ACTION_MODIFY_EMPLOYEE);
+                    i.putExtra(Search_name, message);
+
+                    startForegroundService(i);
                     break;
                 }
                 case ACTION_INSERT_EMPLOYEE: {
                     Object[] param_info = (Object[]) intent.getSerializableExtra(info);
                     insertAction(param_info);
+                    Intent i = new Intent(getApplicationContext(), myNotification.class);
+                    i.setAction(ACTION_INSERT_EMPLOYEE);
+                    i.putExtra(Search_name, (String) param_info[1]);
+                    i.putExtra(Search_gender, (char) param_info[2]);
+                    startForegroundService(i);
                     break;
                 }
                 case ACTION_SEARCH: {
@@ -110,7 +127,7 @@ public class storeService extends IntentService {
         }
     }
 
-    private void modifyAction(emp param_person, float param_salary, float param_sale, float param_rate, int safePosition) {
+    private String modifyAction(emp param_person, float param_salary, float param_sale, float param_rate, int safePosition) {
         MainActivity.DB.update(param_person.getId(), param_salary, param_sale, param_rate);
 
         Intent intent = new Intent();
@@ -120,6 +137,16 @@ public class storeService extends IntentService {
         intent.putExtra(sale, param_sale);
         intent.putExtra(rate, param_rate);
         sendBroadcast(intent);
+        float f_salary = param_person.getSalary() - param_salary;
+        float f_sale = param_person.getSales() - param_sale;
+        float f_rate = param_person.getRate() - param_rate;
+
+        if (f_rate == 0 && f_sale == 0 && f_salary == 0)
+            return "no value change for " + param_person.getName();
+        return "modify : " + (f_salary != 0.0f ? "salary -> " + param_salary : " ")
+                + (f_sale != 0.0f ? "Tatal Sales -> " + param_sale : " ")
+                + (f_rate != 0.0f ? "commission rate -> " + param_rate : " ")
+                + "for " + param_person.getName() + "  Successfully";
 
     }
 
@@ -141,7 +168,6 @@ public class storeService extends IntentService {
 
         Intent intent = new Intent();
         intent.setAction(ACTION_INSERT_EMPLOYEE);
-
         sendBroadcast(intent);
     }
 }
