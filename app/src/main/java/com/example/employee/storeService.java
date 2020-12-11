@@ -32,6 +32,7 @@ public class storeService extends IntentService {
     public static final String Search_gender = "searchGender";
     public static final String Checked_Radio_ButtonId = "CheckedRadioButtonId";
     public static final String data = "data";
+    public static final String primaryKey = "This ID is already used";
 
 
     public static myDataBase DB;
@@ -85,11 +86,7 @@ public class storeService extends IntentService {
                 case ACTION_INSERT_EMPLOYEE: {
                     Object[] param_info = (Object[]) intent.getSerializableExtra(info);
                     insertAction(param_info);
-                    Intent i = new Intent(getApplicationContext(), myNotification.class);
-                    i.setAction(ACTION_INSERT_EMPLOYEE);
-                    i.putExtra(Search_name, (String) param_info[1]);
-                    i.putExtra(Search_gender, (char) param_info[2]);
-                    startForegroundService(i);
+
                     break;
                 }
                 case ACTION_SEARCH: {
@@ -163,11 +160,21 @@ public class storeService extends IntentService {
     }
 
     private void insertAction(Object[] info) {
-        DB.insert(info);
+
 
         Intent intent = new Intent();
         intent.setAction(ACTION_INSERT_EMPLOYEE);
         sendBroadcast(intent);
+        Intent i = new Intent(getApplicationContext(), myNotification.class);
+        i.setAction(ACTION_INSERT_EMPLOYEE);
+        if (DB.insert(info)) {
+
+            i.putExtra(Search_name, (String) info[1]);
+            i.putExtra(Search_gender, (char) info[2]);
+        } else {
+            i.putExtra(Search_name, primaryKey);
+        }
+        startForegroundService(i);
     }
 }
 
