@@ -72,6 +72,12 @@ public class myNotification extends Service {
                 break;
             }
             case storeService.ACTION_INSERT_EMPLOYEE: {
+                if (intent.getStringExtra(storeService.Search_name).equals(storeService.primaryKey)) {
+                    pushNotification(Insert_Channel_ID, "insert Employee",
+                            intent.getStringExtra(storeService.Search_name),
+                            R.drawable.warning);
+                    break;
+                }
                 char g = intent.getCharExtra(storeService.Search_gender, 'm');
                 int icon = (g == 'm') ? R.drawable.man : R.drawable.woman;
                 pushNotification(Insert_Channel_ID, "insert Employee",
