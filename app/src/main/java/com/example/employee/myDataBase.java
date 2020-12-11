@@ -54,12 +54,22 @@ public class myDataBase {
         return getData(rs);
     }
 
-    public void insert(Object[] info) {
-        db.execSQL("insert into emp values(?,?,?,?,?,?);", info);
+    public boolean insert(Object[] info) {
+        try {
+            db.execSQL("insert into emp values(?,?,?,?,?,?);", info);
+            return true;
+        } catch (Exception ex) {
+            Log.e("catchError", Objects.requireNonNull(ex.getMessage()));
+            return false;
+        }
     }
 
     public void delete(int id) {
-        db.delete("emp", "id = ?", new String[]{"" + id});
+        try {
+            db.delete("emp", "id = ?", new String[]{"" + id});
+        } catch (Exception ex) {
+            Log.e("catchError", Objects.requireNonNull(ex.getMessage()));
+        }
     }
 
     public void update(int id, float salary, float sales, float rate) {
@@ -67,7 +77,11 @@ public class myDataBase {
         vs.put("BaseSalary", salary);
         vs.put("TotalSalary", sales);
         vs.put("CommissionRate", rate);
-        db.update("emp", vs, "id = " + id, null);
+        try {
+            db.update("emp", vs, "id = " + id, null);
+        } catch (Exception ex) {
+            Log.e("catchError", Objects.requireNonNull(ex.getMessage()));
+        }
     }
 
     private ArrayList<emp> getData(Cursor rs) {
