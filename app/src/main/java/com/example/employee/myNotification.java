@@ -48,7 +48,7 @@ public class myNotification extends Service {
         if (check) {
             createChannel("insert");
             NotificationCompat.Builder notefor;
-            notefor = new NotificationCompat.Builder(getApplicationContext(), Insert_Channel_ID)
+            notefor = new NotificationCompat.Builder(getApplicationContext(), "insert")
                     .setAutoCancel(true)
                     .setOngoing(false)
                     .setSmallIcon(R.drawable.employee)
